@@ -1,0 +1,60 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'war'
+
+sourceCompatibility = 1.8
+version = '1.0'
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'Gradle Quickstart',
+                   'Implementation-Version': version
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+project.webAppDirName = 'webapps'
+
+task deployToTomcat(type: Copy) {
+    from "build/libs/"
+    into "/home/marcelo/Desarrollo/Servers/apache-tomcat-8.0.46/webapps/"
+    rename 'SpringSecurityWithJWT-1.0.war', "spring.war"
+}
+
+
+dependencies {
+    compile group: 'commons-collections', name: 'commons-collections', version: '3.2'
+    compile group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
+    compile group: 'org.springframework', name: 'spring-core', version: '5.0.8.RELEASE'
+    compile group: 'org.springframework', name: 'spring-beans', version: '5.0.8.RELEASE'
+    compile group: 'org.springframework', name: 'spring-aop', version: '5.0.8.RELEASE'
+    compile group: 'org.springframework', name: 'spring-context', version: '5.0.8.RELEASE'
+    compile group: 'org.springframework', name: 'spring-web', version: '5.0.8.RELEASE'
+    compile group: 'org.springframework', name: 'spring-webmvc', version: '5.0.8.RELEASE'
+    compile group: 'org.springframework.security', name: 'spring-security-core', version: '5.0.7.RELEASE'
+    compile group: 'org.springframework.security', name: 'spring-security-config', version: '5.0.7.RELEASE'
+    compile group: 'org.springframework.security', name: 'spring-security-web', version: '5.0.7.RELEASE'
+    compile group: 'javax.servlet', name: 'javax.servlet-api', version: '3.1.0'
+    compile group: 'javax.servlet', name: 'jstl', version: '1.2'
+    compile group: 'org.apache.commons', name: 'commons-io', version: '1.3.2'
+    compile group: 'commons-fileupload', name: 'commons-fileupload', version: '1.2'
+    compile group: 'org.aspectj', name: 'aspectjrt', version: '1.7.3'
+    compile group: 'org.aspectj', name: 'aspectjweaver', version: '1.7.3'
+    compile group: 'com.jcabi', name: 'jcabi-aspects', version: '0.22'
+    
+    testCompile group: 'junit', name: 'junit', version: '4.+'
+}
+
+test {
+    systemProperties 'property': 'value'
+}
+
+uploadArchives {
+    repositories {
+       flatDir {
+           dirs 'repos'
+       }
+    }
+}
