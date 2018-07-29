@@ -16,3 +16,6 @@ There is a test class (JwtTokenTest) which generates a valid token to test via R
 /helloWorld/sayHello endpoint but you can't hit /helloWorld/sayHelloAsAdmin.
 
 You can play with this code and configure as you wish.
+
+*************************
+In Eclipse, import as Gradle STS Project.
